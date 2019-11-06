@@ -6,7 +6,7 @@ import os
 
 st.title('Computer vision model')
 st.text('Classification of such images: buildings, forest, glacier, mountain, sea, street')
-directory = 'C:/users/admin/desktop/web-app/img/'
+directory = 'img/'
 if st.checkbox('Show current directory'):
 	st.info(directory)
 
@@ -21,7 +21,7 @@ st.image(img)
 dictionary = {0:'buildings', 1:'forest', 2:'glacier', 3:'mountain', 4:'sea', 5:'street'}
 
 def pred_func():
-	arr = np.asarray(img, dtype='uint8').reshape(1,150,150,3)/255.0
+	arr = np.asarray(img).reshape(1,150,150,3)/255.0
 	predict_model = pickle.load(open('CV_model.sav','rb'))
 	predict = predict_model.predict(arr).argmax(axis = 1)[0]
 	return dictionary[predict]
